@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+<<<<<<< HEAD
     namespace = "com.hieng.notes"
     compileSdk = 34
 
@@ -16,6 +17,17 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
+=======
+    namespace = "com.kin.easynotes"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.kin.easynotes"
+        minSdk = 26
+        targetSdk = 34
+        versionCode = 8
+        versionName = "1.3.75"
+>>>>>>> 7a6cd39e4da4649b18d5095bee81794a3ce2e7b3
         vectorDrawables {
             useSupportLibrary = true
         }
