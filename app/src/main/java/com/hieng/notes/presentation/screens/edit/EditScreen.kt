@@ -3,6 +3,7 @@ package com.hieng.notes.presentation.screens.edit
 import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -44,6 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -72,6 +74,7 @@ import com.hieng.notes.presentation.screens.settings.widgets.ActionType
 import com.hieng.notes.presentation.screens.settings.widgets.SettingsBox
 import com.hieng.notes.presentation.screens.settings.widgets.copyToClipboard
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -352,6 +355,19 @@ fun PreviewScreen(viewModel: EditViewModel, settingsViewModel: SettingsViewModel
     Column(
         modifier = Modifier.padding(16.dp),
     ) {
+
+        // Double-tap to edit
+        Modifier.pointerInput(Unit) {
+            detectTapGestures(
+                onDoubleTap = {
+                    // Switch to Edit mode (page 0)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        pagerState.animateScrollToPage(0)
+                    }
+                }
+            )
+        }
+
         if (showOnlyDescription) {
             MarkdownBox(
                 isExtremeAmoled = settingsViewModel.settings.value.extremeAmoledMode,
