@@ -1,9 +1,8 @@
-package com.hieng.notes.presentation.screens.edit
+package com.kin.easynotes.presentation.screens.edit
 
 import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -45,7 +44,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -56,25 +54,24 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.hieng.notes.R
-import com.hieng.notes.presentation.components.MoreButton
-import com.hieng.notes.presentation.components.NavigationIcon
-import com.hieng.notes.presentation.components.NotesScaffold
-import com.hieng.notes.presentation.components.RedoButton
-import com.hieng.notes.presentation.components.SaveButton
-import com.hieng.notes.presentation.components.UndoButton
-import com.hieng.notes.presentation.components.markdown.MarkdownText
-import com.hieng.notes.presentation.screens.edit.components.CustomIconButton
-import com.hieng.notes.presentation.screens.edit.components.CustomTextField
-import com.hieng.notes.presentation.screens.edit.components.TextFormattingToolbar
-import com.hieng.notes.presentation.screens.edit.model.EditViewModel
-import com.hieng.notes.presentation.screens.settings.model.SettingsViewModel
-import com.hieng.notes.presentation.screens.settings.settings.shapeManager
-import com.hieng.notes.presentation.screens.settings.widgets.ActionType
-import com.hieng.notes.presentation.screens.settings.widgets.SettingsBox
-import com.hieng.notes.presentation.screens.settings.widgets.copyToClipboard
+import com.kin.easynotes.R
+import com.kin.easynotes.presentation.components.MoreButton
+import com.kin.easynotes.presentation.components.NavigationIcon
+import com.kin.easynotes.presentation.components.NotesScaffold
+import com.kin.easynotes.presentation.components.RedoButton
+import com.kin.easynotes.presentation.components.SaveButton
+import com.kin.easynotes.presentation.components.UndoButton
+import com.kin.easynotes.presentation.components.markdown.MarkdownText
+import com.kin.easynotes.presentation.screens.edit.components.CustomIconButton
+import com.kin.easynotes.presentation.screens.edit.components.CustomTextField
+import com.kin.easynotes.presentation.screens.edit.components.TextFormattingToolbar
+import com.kin.easynotes.presentation.screens.edit.model.EditViewModel
+import com.kin.easynotes.presentation.screens.settings.model.SettingsViewModel
+import com.kin.easynotes.presentation.screens.settings.settings.shapeManager
+import com.kin.easynotes.presentation.screens.settings.widgets.ActionType
+import com.kin.easynotes.presentation.screens.settings.widgets.SettingsBox
+import com.kin.easynotes.presentation.screens.settings.widgets.copyToClipboard
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -355,19 +352,6 @@ fun PreviewScreen(viewModel: EditViewModel, settingsViewModel: SettingsViewModel
     Column(
         modifier = Modifier.padding(16.dp),
     ) {
-
-        // Double-tap to edit
-        Modifier.pointerInput(Unit) {
-            detectTapGestures(
-                onDoubleTap = {
-                    // Switch to Edit mode (page 0)
-                    CoroutineScope(Dispatchers.Main).launch {
-                        pagerState.animateScrollToPage(0)
-                    }
-                }
-            )
-        }
-
         if (showOnlyDescription) {
             MarkdownBox(
                 isExtremeAmoled = settingsViewModel.settings.value.extremeAmoledMode,

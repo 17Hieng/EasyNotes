@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider
+<<<<<<< HEAD
     android:configure="com.hieng.notes.widget.NotesWidgetActivity"
+=======
+    android:configure="com.kin.easynotes.widget.NotesWidgetActivity"
+>>>>>>> 7a6cd39e4da4649b18d5095bee81794a3ce2e7b3
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:minHeight="50.dp"
     android:minWidth="100.dp"
