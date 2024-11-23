@@ -39,16 +39,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
@@ -74,7 +78,6 @@ import com.hieng.notes.presentation.screens.settings.widgets.ActionType
 import com.hieng.notes.presentation.screens.settings.widgets.SettingsBox
 import com.hieng.notes.presentation.screens.settings.widgets.copyToClipboard
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -352,21 +355,21 @@ fun PreviewScreen(viewModel: EditViewModel, settingsViewModel: SettingsViewModel
     focusManager.clearFocus()
     val showOnlyDescription = viewModel.noteName.value.text.isNotBlank()
 
-    Column(
-        modifier = Modifier.padding(16.dp),
-    ) {
+    val coroutineScope = rememberCoroutineScope()
 
-        // Double-tap to edit
-        Modifier.pointerInput(Unit) {
-            detectTapGestures(
-                onDoubleTap = {
-                    // Switch to Edit mode (page 0)
-                    CoroutineScope(Dispatchers.Main).launch {
-                        pagerState.animateScrollToPage(0)
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(0)
+                        }
                     }
-                }
-            )
-        }
+                )
+            },
+    ) {
 
         if (showOnlyDescription) {
             MarkdownBox(
