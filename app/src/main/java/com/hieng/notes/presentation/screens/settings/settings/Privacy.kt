@@ -37,17 +37,6 @@ fun PrivacyScreen(navController: NavController, settingsViewModel: SettingsViewM
                 )
                 Spacer(modifier = Modifier.height(18.dp))
             }
-            item {
-                SettingsBox(
-                    title = stringResource(id = R.string.vault),
-                    description = stringResource(id = R.string.vault_description),
-                    icon = Icons.Rounded.Security,
-                    radius = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isBoth = true),
-                    actionType = ActionType.SWITCH,
-                    variable = settingsViewModel.settings.value.vaultSettingEnabled,
-                    switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(vaultSettingEnabled = it)) },
-                )
-            }
         }
     }
 }
