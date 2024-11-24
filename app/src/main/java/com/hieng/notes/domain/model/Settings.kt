@@ -1,7 +1,7 @@
 package com.hieng.notes.domain.model
 
 data class Settings(
-    val viewMode: Boolean = true,
+    val viewMode: Boolean = false,
     val automaticTheme: Boolean = true,
     val darkTheme: Boolean = false,
     var dynamicTheme: Boolean = false,
@@ -20,6 +20,6 @@ data class Settings(
     var termsOfService: Boolean = false,
     var useMonoSpaceFont: Boolean = false,
 
-    var cornerRadius: Int = 32,
+    var cornerRadius: Int = 12,
 )
 
