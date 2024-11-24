@@ -138,38 +138,38 @@ fun ColorStylesScreen(navController: NavController, settingsViewModel: SettingsV
                 )
                 Spacer(modifier = Modifier.height(18.dp))
             }
-            item {
-                SettingsBox(
-                    title = stringResource(id = R.string.radius),
-                    description = stringResource(id = R.string.radius_description),
-                    icon = Icons.Rounded.RoundedCorner,
-                    radius = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
-                    actionType = ActionType.CUSTOM,
-                    customAction = {
-                        onExit -> OnRadiusClicked(settingsViewModel) {
-                            settingsViewModel.update(settingsViewModel.settings.value.copy(cornerRadius = it))
-                            onExit()
-                        }
-                    }
-                )
-            }
-            item {
-                SettingsBox(
-                    title = if (settingsViewModel.settings.value.viewMode) stringResource(id = R.string.grid_view) else stringResource(id = R.string.column_view),
-                    icon = if (settingsViewModel.settings.value.viewMode) Icons.Rounded.GridView else Icons.Rounded.ViewAgenda,
-                    description = stringResource(id = R.string.view_style_description),
-                    radius = shapeManager(radius = settingsViewModel.settings.value.cornerRadius),
-                    actionType = ActionType.SWITCH,
-                    variable = settingsViewModel.settings.value.viewMode,
-                    switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(viewMode = it))}
-                )
-            }
+//            item {
+//                SettingsBox(
+//                    title = stringResource(id = R.string.radius),
+//                    description = stringResource(id = R.string.radius_description),
+//                    icon = Icons.Rounded.RoundedCorner,
+//                    radius = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
+//                    actionType = ActionType.CUSTOM,
+//                    customAction = {
+//                        onExit -> OnRadiusClicked(settingsViewModel) {
+//                            settingsViewModel.update(settingsViewModel.settings.value.copy(cornerRadius = it))
+//                            onExit()
+//                        }
+//                    }
+//                )
+//            }
+//            item {
+//                SettingsBox(
+//                    title = if (settingsViewModel.settings.value.viewMode) stringResource(id = R.string.grid_view) else stringResource(id = R.string.column_view),
+//                    icon = if (settingsViewModel.settings.value.viewMode) Icons.Rounded.GridView else Icons.Rounded.ViewAgenda,
+//                    description = stringResource(id = R.string.view_style_description),
+//                    radius = shapeManager(radius = settingsViewModel.settings.value.cornerRadius),
+//                    actionType = ActionType.SWITCH,
+//                    variable = settingsViewModel.settings.value.viewMode,
+//                    switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(viewMode = it))}
+//                )
+//            }
             item {
                 SettingsBox(
                     title = if (settingsViewModel.settings.value.sortDescending) stringResource(id = R.string.sort_descending) else stringResource(id = R.string.sort_ascending),
                     description = stringResource(id = R.string.sort_description),
                     icon = Icons.AutoMirrored.Rounded.Sort,
-                    radius = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isLast = true),
+                    radius = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isBoth = true),
                     actionType = ActionType.SWITCH,
                     variable = settingsViewModel.settings.value.sortDescending,
                     switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(sortDescending = it)) }

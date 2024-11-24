@@ -124,7 +124,7 @@ fun MainSettings(settingsViewModel: SettingsViewModel,navController: NavControll
                     title = stringResource(id = R.string.privacy),
                     subTitle = stringResource(id = R.string.screen_protection),
                     icon = ImageVector.vectorResource(id = R.drawable.incognito_fill),
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isBoth = true),
+                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
                     action = { navController.navigate(NavRoutes.Privacy.route) }
                 )
             }
@@ -142,7 +142,7 @@ fun MainSettings(settingsViewModel: SettingsViewModel,navController: NavControll
                     title = stringResource(id = R.string.about),
                     subTitle = stringResource(R.string.description_about),
                     icon = Icons.Rounded.Info,
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isBoth = true),
+                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isLast = true),
                     action = { navController.navigate(NavRoutes.About.route) }
                 )
             }
