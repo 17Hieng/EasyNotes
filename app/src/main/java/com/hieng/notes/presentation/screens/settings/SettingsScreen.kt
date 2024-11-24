@@ -86,20 +86,20 @@ fun MainSettings(settingsViewModel: SettingsViewModel,navController: NavControll
         onBackNavClicked = { navController.navigateUp() }
     ) {
         LazyColumn {
-            item {
-                SettingCategory(
-                    title = stringResource(id = R.string.color_styles),
-                    subTitle = stringResource(R.string.description_color_styles),
-                    icon = Icons.Rounded.Palette,
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
-                    action = { navController.navigate(NavRoutes.ColorStyles.route) })
-            }
+//            item {
+//                SettingCategory(
+//                    title = stringResource(id = R.string.color_styles),
+//                    subTitle = stringResource(R.string.description_color_styles),
+//                    icon = Icons.Rounded.Palette,
+//                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
+//                    action = { navController.navigate(NavRoutes.ColorStyles.route) })
+//            }
             item {
                 SettingCategory(
                     title = stringResource(id = R.string.Behavior),
                     subTitle = stringResource(id = R.string.description_markdown),
                     icon = Icons.Rounded.TextFields,
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius),
+                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
                     action = { navController.navigate(NavRoutes.Markdown.route) })
             }
             item {
