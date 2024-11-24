@@ -88,17 +88,6 @@ fun MainSettings(settingsViewModel: SettingsViewModel,navController: NavControll
         LazyColumn {
             item {
                 SettingCategory(
-                    smallSetting = true,
-                    title = stringResource(id = R.string.support),
-                    subTitle = stringResource(id = R.string.support_description),
-                    icon = Icons.AutoMirrored.Rounded.ArrowForwardIos,
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isBoth = true),
-                    isLast = true,
-                    composableAction = { onExit -> BottomModal(navController = navController, settingsViewModel = settingsViewModel) { onExit() }}
-                )
-            }
-            item {
-                SettingCategory(
                     title = stringResource(id = R.string.color_styles),
                     subTitle = stringResource(R.string.description_color_styles),
                     icon = Icons.Rounded.Palette,
@@ -122,32 +111,32 @@ fun MainSettings(settingsViewModel: SettingsViewModel,navController: NavControll
                     shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isLast = true),
                     action = { navController.navigate(NavRoutes.Language.route) })
             }
-            item {
-                SettingCategory(
-                    title = stringResource(id = R.string.backup),
-                    subTitle = stringResource(R.string.description_cloud),
-                    icon = Icons.Rounded.Cloud,
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
-                    action = { navController.navigate(NavRoutes.Cloud.route) })
-            }
+//            item {
+//                SettingCategory(
+//                    title = stringResource(id = R.string.backup),
+//                    subTitle = stringResource(R.string.description_cloud),
+//                    icon = Icons.Rounded.Cloud,
+//                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isFirst = true),
+//                    action = { navController.navigate(NavRoutes.Cloud.route) })
+//            }
             item {
                 SettingCategory(
                     title = stringResource(id = R.string.privacy),
                     subTitle = stringResource(id = R.string.screen_protection),
                     icon = ImageVector.vectorResource(id = R.drawable.incognito_fill),
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius),
+                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isBoth = true),
                     action = { navController.navigate(NavRoutes.Privacy.route) }
                 )
             }
-            item {
-                SettingCategory(
-                    title = stringResource(id = R.string.tools),
-                    subTitle = stringResource(R.string.description_tools),
-                    icon = Icons.Rounded.Work,
-                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isLast = true),
-                    isLast = true,
-                    action = { navController.navigate(NavRoutes.Tools.route) })
-            }
+//            item {
+//                SettingCategory(
+//                    title = stringResource(id = R.string.tools),
+//                    subTitle = stringResource(R.string.description_tools),
+//                    icon = Icons.Rounded.Work,
+//                    shape = shapeManager(radius = settingsViewModel.settings.value.cornerRadius, isLast = true),
+//                    isLast = true,
+//                    action = { navController.navigate(NavRoutes.Tools.route) })
+//            }
             item {
                 SettingCategory(
                     title = stringResource(id = R.string.about),

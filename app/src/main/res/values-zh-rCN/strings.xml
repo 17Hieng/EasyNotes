@@ -64,8 +64,7 @@
     <string name="history">历史记录</string>
     <string name="description_tools">已创建 • 删除全部</string>
     <string name="description_markdown">支持 • 图片</string>
-    <string name="support_description">猫猫很可爱,请给猫猫钱.
-\n快,给钱.不然我就要咬你!/ᐠ. ｡.ᐟ\\ᵐᵉᵒʷˎˊ˗</string>
+    <string name="support_description">赞助原创</string>
     <string name="select_font">字体</string>
     <string name="radius">圆角半径</string>
     <string name="select_radius">设置半径</string>

@@ -48,7 +48,7 @@
     <string name="description_history">History • Revert</string>
     <string name="description_tools">Created • Delete All</string>
     <string name="description_markdown">Support • Images</string>
-    <string name="support_description">Show your love</string>
+    <string name="support_description">Donate to original creator</string>
     <string name="select_font">Font</string>
     <string name="radius">Radius</string>
     <string name="select_radius">Select Radius</string>
@@ -136,4 +136,5 @@
     <string name="file_import_description">Import other text files as notes</string>
     <string name="monospace_font_description">Use monospace font while editing note</string>
     <string name="monospace_font">Monospace font</string>
+    <string name="project_based">This project is based on open source project.</string>
 </resources>
