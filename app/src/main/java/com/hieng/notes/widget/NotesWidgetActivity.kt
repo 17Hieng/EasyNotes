@@ -66,6 +66,7 @@ class NotesWidgetActivity : ComponentActivity() {
                                 }
                             },
                             notes = noteUseCase.notes.sortedWith(sorter(settings.settings.value.sortDescending)),
+                            nativeAd = null,
                             viewMode = false,
                         )
                     }

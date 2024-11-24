@@ -5,7 +5,12 @@ import android.widget.Toast
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.nativead.NativeAd
+import com.hieng.notes.BuildConfig
 import com.hieng.notes.R
 import com.hieng.notes.domain.model.Note
 import com.hieng.notes.domain.usecase.NoteUseCase
@@ -37,6 +42,17 @@ class HomeViewModel @Inject constructor(
 
     init {
         noteUseCase.observe()
+    }
+
+    val nativeAd = MutableLiveData<NativeAd?>()
+
+    fun loadNativeAd(context: Context) {
+        val adLoader = AdLoader.Builder(context, BuildConfig.ADMOB_ADUNIT_ID)
+            .forNativeAd { ad: NativeAd ->
+                nativeAd.value = ad
+            }
+            .build()
+        adLoader.loadAd(AdRequest.Builder().build())
     }
 
     fun toggleIsDeleteMode(enabled: Boolean) {

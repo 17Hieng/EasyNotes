@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.ads.nativead.NativeAd
 import com.hieng.notes.R
 import com.hieng.notes.domain.model.Note
 import com.hieng.notes.presentation.screens.settings.model.SettingsViewModel
@@ -24,6 +25,7 @@ fun NoteFilter(
     onNoteClicked: (Int) -> Unit,
     shape: RoundedCornerShape,
     notes: List<Note>,
+    nativeAd: NativeAd?,
     searchText: String? = null,
     selectedNotes: MutableList<Note> = mutableListOf(),
     viewMode: Boolean = false,
@@ -32,6 +34,8 @@ fun NoteFilter(
     onDeleteNote: (Int) -> Unit = {}
 ) {
     val filteredNotes = filterNotes(notes, searchText)
+    val items = filterNotesWithAds(filterNotes(notes, searchText), nativeAd)
+
     if (filteredNotes.isEmpty()) {
         Placeholder(
             placeholderIcon = {
@@ -49,7 +53,7 @@ fun NoteFilter(
             settingsViewModel = settingsViewModel,
             containerColor = containerColor,
             onNoteClicked = onNoteClicked,
-            notes = filteredNotes,
+            notes = items,
             shape = shape,
             onNoteUpdate = onNoteUpdate,
             selectedNotes = selectedNotes,
@@ -66,6 +70,26 @@ private fun filterNotes(notes: List<Note>, searchText: String?): List<Note> {
             note.name.contains(query, ignoreCase = true) || note.description.contains(query, ignoreCase = true)
         }
     } ?: notes
+}
+
+private fun filterNotesWithAds(
+    notes: List<Note>,
+    nativeAd: NativeAd?,
+    adPosition: Int = 15
+): List<Any> {
+    val items = mutableListOf<Any>()
+
+    notes.forEachIndexed { index, note ->
+        if (notes.size < adPosition && index == 1 && nativeAd != null) {
+            items.add(nativeAd)
+        }
+        items.add(note)
+        if ((index + 1) % adPosition == 0 && nativeAd != null) {
+            items.add(nativeAd)
+        }
+    }
+
+    return items
 }
 
 @Composable
