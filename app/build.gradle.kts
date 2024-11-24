@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -5,6 +7,15 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
 }
+
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        load(file.inputStream())
+    }
+}
+val admobAppId = localProperties.getProperty("ADMOB_APP_ID") ?: ""
+val admobAdunitId = localProperties.getProperty("ADMOB_ADUNIT_ID") ?: ""
 
 android {
     namespace = "com.hieng.notes"
@@ -19,6 +30,13 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+
+
+        buildConfigField("String", "ADMOB_APP_ID", "\"$admobAppId\"")
+        buildConfigField("String", "ADMOB_ADUNIT_ID", "\"$admobAdunitId\"")
+
+        manifestPlaceholders.put("admobAppId", admobAppId)
 
         // https://developer.android.com/guide/topics/resources/app-languages#gradle-config
         resourceConfigurations.plus(
@@ -59,6 +77,7 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        viewBinding = true
     }
     packaging {
         resources {
@@ -69,10 +88,13 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.glance)
     implementation(libs.coil.compose)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.androidx.glance.appwidget)
+    implementation(libs.play.services.ads.lite)
+    implementation(libs.androidx.cardview)
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compile)
@@ -87,4 +109,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.ui.viewbinding)
+    implementation(libs.play.services.ads)
 }

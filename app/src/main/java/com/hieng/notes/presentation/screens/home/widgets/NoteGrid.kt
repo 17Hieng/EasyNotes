@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.android.gms.ads.nativead.NativeAd
 import com.hieng.notes.R
 import com.hieng.notes.domain.model.Note
 import com.hieng.notes.presentation.components.getNoteEnterAnimation
@@ -30,18 +31,18 @@ fun NotesGrid(
     settingsViewModel: SettingsViewModel,
     containerColor: Color,
     onNoteClicked: (Int) -> Unit,
-    shape : RoundedCornerShape,
-    notes: List<Note>,
+    shape: RoundedCornerShape,
+    notes: List<Any>, // The list should now contain both Notes and NativeAds
     onNoteUpdate: (Note) -> Unit,
     selectedNotes: MutableList<Note>,
     viewMode: Boolean,
     isDeleteClicked: Boolean,
     animationFinished: (Int) -> Unit
 ) {
-    val (pinnedNotes, otherNotes) = notes.partition { it.pinned }
+    val (pinnedItems, otherItems) = notes.partition { it is Note && it.pinned }
 
     @Composable
-    fun Note(note: Note, notes: List<Note>) {
+    fun NoteItem(note: Note, notes: List<Note>) {
         val isAnimationVisible = rememberTransitionState()
         AnimatedVisibility(
             visibleState = isAnimationVisible,
@@ -65,14 +66,17 @@ fun NotesGrid(
         handleDeleteAnimation(selectedNotes, note, isAnimationVisible, animationFinished)
     }
 
+    // Composables to handle NativeAd items
+    @Composable
+    fun NativeAdItem() {
+        NativeAdCard()
+    }
+
     LazyVerticalStaggeredGrid(
-        columns = when(viewMode) {
-            true -> StaggeredGridCells.Fixed(2)
-            false -> StaggeredGridCells.Fixed(1)
-        },
+        columns = if (viewMode) StaggeredGridCells.Fixed(2) else StaggeredGridCells.Fixed(1),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         content = {
-            if (pinnedNotes.isNotEmpty()) {
+            if (pinnedItems.isNotEmpty()) {
                 item(span = StaggeredGridItemSpan.FullLine) {
                     Text(
                         modifier = Modifier.padding(bottom = 16.dp),
@@ -80,10 +84,10 @@ fun NotesGrid(
                         style = TextStyle(fontSize = 10.sp, color = MaterialTheme.colorScheme.secondary)
                     )
                 }
-                items(pinnedNotes) { note ->
-                    Note(note, pinnedNotes)
+                items(pinnedItems.filterIsInstance<Note>()) { note ->
+                    NoteItem(note, pinnedItems.filterIsInstance<Note>())
                 }
-                if (otherNotes.isNotEmpty()) {
+                if (otherItems.isNotEmpty()) {
                     item(span = StaggeredGridItemSpan.FullLine) {
                         Text(
                             modifier = Modifier.padding(vertical = 16.dp),
@@ -93,8 +97,12 @@ fun NotesGrid(
                     }
                 }
             }
-            items(otherNotes) { note ->
-                Note(note, otherNotes)
+
+            items(otherItems) { item ->
+                when (item) {
+                    is Note -> NoteItem(note = item, notes = otherItems.filterIsInstance<Note>())
+                    is NativeAd -> NativeAdItem() // Handle NativeAd
+                }
             }
         },
         modifier = Modifier.padding(horizontal = 12.dp)

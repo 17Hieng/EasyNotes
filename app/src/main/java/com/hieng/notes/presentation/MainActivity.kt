@@ -9,6 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.gms.ads.MobileAds
+import com.hieng.notes.BuildConfig
 import com.hieng.notes.data.repository.SettingsRepositoryImpl
 import com.hieng.notes.presentation.navigation.AppNavHost
 import com.hieng.notes.presentation.screens.settings.model.SettingsViewModel
@@ -20,6 +22,10 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var settingsRepositoryImpl: SettingsRepositoryImpl
+
+    val admobAppId = BuildConfig.ADMOB_APP_ID
+    val admobAdUnitId = BuildConfig.ADMOB_ADUNIT_ID
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +50,9 @@ class MainActivity : AppCompatActivity() {
                     AppNavHost(settingsViewModel, noteId = noteId)
                 }
             }
+        }
+        MobileAds.initialize(this) {
+
         }
     }
 }
