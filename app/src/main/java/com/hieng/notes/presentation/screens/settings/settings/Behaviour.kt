@@ -31,25 +31,25 @@ fun MarkdownScreen(navController: NavController, settingsViewModel: SettingsView
     ) {
         val context = LocalContext.current
         LazyColumn {
-            item {
-                SettingsBox(
-                    title = stringResource(id = R.string.markdown),
-                    description = stringResource(id = R.string.markdown_description),
-                    icon = Icons.Rounded.Style,
-                    actionType = ActionType.SWITCH,
-                    radius = shapeManager(isBoth = true, radius = settingsViewModel.settings.value.cornerRadius),
-                    variable = settingsViewModel.settings.value.isMarkdownEnabled,
-                    switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(isMarkdownEnabled = it))}
-                )
-                Spacer(modifier = Modifier.height(18.dp))
-            }
+//            item {
+//                SettingsBox(
+//                    title = stringResource(id = R.string.markdown),
+//                    description = stringResource(id = R.string.markdown_description),
+//                    icon = Icons.Rounded.Style,
+//                    actionType = ActionType.SWITCH,
+//                    radius = shapeManager(isBoth = true, radius = settingsViewModel.settings.value.cornerRadius),
+//                    variable = settingsViewModel.settings.value.isMarkdownEnabled,
+//                    switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(isMarkdownEnabled = it))}
+//                )
+//                Spacer(modifier = Modifier.height(18.dp))
+//            }
             item {
                 SettingsBox(
                     title = stringResource(id = R.string.always_edit),
                     description = stringResource(id = R.string.always_edit_description),
                     icon = Icons.Rounded.Edit,
                     actionType = ActionType.SWITCH,
-                    radius = shapeManager(isFirst = true, radius = settingsViewModel.settings.value.cornerRadius),
+                    radius = shapeManager(isBoth = true, radius = settingsViewModel.settings.value.cornerRadius),
                     variable = settingsViewModel.settings.value.editMode,
                     switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(editMode = it))}
                 )
