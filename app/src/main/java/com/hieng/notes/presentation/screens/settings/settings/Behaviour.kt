@@ -49,33 +49,33 @@ fun MarkdownScreen(navController: NavController, settingsViewModel: SettingsView
                     description = stringResource(id = R.string.always_edit_description),
                     icon = Icons.Rounded.Edit,
                     actionType = ActionType.SWITCH,
-                    radius = shapeManager(isFirst = true, radius = settingsViewModel.settings.value.cornerRadius),
+                    radius = shapeManager(isBoth = true, radius = settingsViewModel.settings.value.cornerRadius),
                     variable = settingsViewModel.settings.value.editMode,
                     switchEnabled = { settingsViewModel.update(settingsViewModel.settings.value.copy(editMode = it))}
                 )
             }
-            item {
-                SettingsBox(
-                    title = stringResource(id = R.string.gallery_sync),
-                    description = stringResource(id = R.string.gallery_sync_description),
-                    icon = Icons.Rounded.Image,
-                    actionType = ActionType.SWITCH,
-                    radius = shapeManager(isLast = true, radius = settingsViewModel.settings.value.cornerRadius),
-                    variable = settingsViewModel.settings.value.gallerySync,
-                    switchEnabled = {
-                        if (!it) {
-                            unregisterGalleryObserver(context, settingsViewModel.galleryObserver)
-                        } else {
-                            context.contentResolver.registerContentObserver(
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                true,
-                                settingsViewModel.galleryObserver
-                            )
-                        }
-                        settingsViewModel.update(settingsViewModel.settings.value.copy(gallerySync = it))
-                    }
-                )
-            }
+//            item {
+//                SettingsBox(
+//                    title = stringResource(id = R.string.gallery_sync),
+//                    description = stringResource(id = R.string.gallery_sync_description),
+//                    icon = Icons.Rounded.Image,
+//                    actionType = ActionType.SWITCH,
+//                    radius = shapeManager(isLast = true, radius = settingsViewModel.settings.value.cornerRadius),
+//                    variable = settingsViewModel.settings.value.gallerySync,
+//                    switchEnabled = {
+//                        if (!it) {
+//                            unregisterGalleryObserver(context, settingsViewModel.galleryObserver)
+//                        } else {
+//                            context.contentResolver.registerContentObserver(
+//                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                                true,
+//                                settingsViewModel.galleryObserver
+//                            )
+//                        }
+//                        settingsViewModel.update(settingsViewModel.settings.value.copy(gallerySync = it))
+//                    }
+//                )
+//            }
 
             item {
                 Spacer(modifier = Modifier.height(18.dp))
