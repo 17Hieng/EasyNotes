@@ -18,6 +18,10 @@ material3 = "1.2.1"
 navigationCompose = "2.7.7"
 appcompat = "1.7.0"
 glanceAppwidget = "1.1.0"
+playServicesAdsLite = "23.5.0"
+composeRuntimeLivedata = "1.7.5"
+uiViewbinding = "1.7.5"
+cardview = "1.0.0"
 
 [libraries]
 # Room
@@ -37,8 +41,10 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeRuntimeLivedata"}
 
 #Hilt
+androidx-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "uiViewbinding" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
 hilt-compile = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler"}
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
@@ -49,6 +55,10 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose"
 
 # Glance
 androidx-glance-appwidget = { group = "androidx.glance", name = "glance-appwidget", version.ref = "glanceAppwidget" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAdsLite" }
+play-services-ads-lite = { group = "com.google.android.gms", name = "play-services-ads-lite", version.ref = "playServicesAdsLite" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+
 
 [plugins]
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

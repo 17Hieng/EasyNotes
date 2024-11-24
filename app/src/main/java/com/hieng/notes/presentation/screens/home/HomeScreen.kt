@@ -14,12 +14,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.gms.ads.nativead.NativeAd
 import com.hieng.notes.R
 import com.hieng.notes.domain.model.Note
 import com.hieng.notes.presentation.components.CloseButton
@@ -51,6 +53,9 @@ fun HomeView (
     onNoteClicked: (Int, Boolean) -> Unit
 ) {
     val context = LocalContext.current
+
+    viewModel.loadNativeAd(context)
+
     if (viewModel.isPasswordPromptVisible.value) {
         PasswordPrompt(
             context = context,
@@ -121,6 +126,7 @@ fun HomeView (
                 ),
                 onNoteClicked = { onNoteClicked(it, viewModel.isVaultMode.value)  },
                 notes = viewModel.getAllNotes().sortedWith(sorter(settingsModel.settings.value.sortDescending)),
+                nativeAd = viewModel.nativeAd.observeAsState().value,
                 selectedNotes = viewModel.selectedNotes,
                 viewMode = settingsModel.settings.value.viewMode,
                 searchText = viewModel.searchQuery.value.ifBlank { null },
