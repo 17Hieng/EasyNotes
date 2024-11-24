@@ -15,7 +15,7 @@ data class Settings(
     var vaultSettingEnabled: Boolean = false,
     var vaultEnabled: Boolean = false,
     var editMode: Boolean = false,
-    var gallerySync: Boolean = true,
+    var gallerySync: Boolean = false,
     var showOnlyTitle: Boolean = false,
     var termsOfService: Boolean = false,
     var useMonoSpaceFont: Boolean = false,

@@ -80,10 +80,10 @@ private fun filterNotesWithAds(
     val items = mutableListOf<Any>()
 
     notes.forEachIndexed { index, note ->
-        if (notes.size < adPosition && index == 1 && nativeAd != null) {
+        items.add(note)
+        if (notes.size < adPosition && index == 0 && nativeAd != null) {
             items.add(nativeAd)
         }
-        items.add(note)
         if ((index + 1) % adPosition == 0 && nativeAd != null) {
             items.add(nativeAd)
         }
