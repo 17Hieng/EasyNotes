@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var settingsRepositoryImpl: SettingsRepositoryImpl
 
-    val admobAppId = BuildConfig.ADMOB_APP_ID
-    val admobAdUnitId = BuildConfig.ADMOB_ADUNIT_ID
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,9 +48,6 @@ class MainActivity : AppCompatActivity() {
                     AppNavHost(settingsViewModel, noteId = noteId)
                 }
             }
-        }
-        MobileAds.initialize(this) {
-
         }
     }
 }

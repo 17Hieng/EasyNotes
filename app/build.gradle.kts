@@ -19,11 +19,11 @@ val admobAdunitId = localProperties.getProperty("ADMOB_ADUNIT_ID") ?: ""
 
 android {
     namespace = "com.hieng.notes"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.hieng.notes"
-        minSdk = 26
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
@@ -44,6 +44,15 @@ android {
         )
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = localProperties.getProperty("keyAlias") ?: ""
+            keyPassword = localProperties.getProperty("keyPassword") ?: ""
+            storeFile = file(localProperties.getProperty("storeFile") ?: "")
+            storePassword = localProperties.getProperty("storePassword") ?: ""
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -53,7 +62,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+
+            signingConfig = signingConfigs.getByName("release")
         }
 
         debug {
